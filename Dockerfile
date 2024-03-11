@@ -19,7 +19,6 @@ COPY --chown=user:user inference.py /opt/app
 
 COPY --chown=user:user weights /opt/app/weights
 COPY --chown=user:user models /opt/app/models
-COPY --chown=user:user loss /opt/app/loss
 COPY --chown=user:user data_manager /opt/app/data_manager
 COPY --chown=user:user data /opt/app/
 COPY --chown=user:user utils.py /opt/app/
