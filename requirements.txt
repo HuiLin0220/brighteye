@@ -5,6 +5,5 @@ scikit-learn
 SimpleITK
 numpy
 imagecodecs
-opencv-python-headless
 pandas
 imgaug
