@@ -133,7 +133,7 @@ def binary_prediction(model,inputs):
     is_referable_glaucoma_likelihood = utils.softmax(outputs_class[0].data.cpu().numpy()) 
     
     is_referable_glaucoma_likelihood = is_referable_glaucoma_likelihood[1]
-    is_referable_glaucoma_likelihood = is_referable_glaucoma_likelihood.astype(numpy.float) 
+    is_referable_glaucoma_likelihood = is_referable_glaucoma_likelihood.astype(numpy.float64) 
     
     return is_referable_glaucoma_likelihood
     
