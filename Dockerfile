@@ -11,7 +11,7 @@ WORKDIR /opt/app
 
 COPY --chown=user:user requirements.txt /opt/app
 
-RUN python -m pip install --user -U pip && python -m pip install --user pip-tools && python -m pip install --user shapely
+RUN python -m pip install --user -U pip 
 RUN pip install --user --no-cache-dir -r /opt/app/requirements.txt
 
 COPY --chown=user:user helper.py /opt/app
