@@ -2,6 +2,7 @@ FROM --platform=linux/amd64  pytorch/pytorch
 
 # Ensures that Python output to stdout/stderr is not buffered: prevents missing information when terminating
 ENV PYTHONUNBUFFERED 1
+ENV PATH="/home/user/.local/bin:${PATH}"
 
 RUN adduser --system --group user
 USER user
