@@ -10,9 +10,8 @@ WORKDIR /opt/app
 
 COPY --chown=user:user requirements.txt /opt/app
 
-RUN python -m pip install \
-    --no-color \
-    --requirement requirements.txt
+
+RUN pip install --user --no-cache-dir -r /opt/app/requirements.txt
 
 COPY --chown=user:user helper.py /opt/app
 COPY --chown=user:user inference.py /opt/app
