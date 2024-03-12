@@ -2,4 +2,5 @@ Pillow
 urllib3==1.26.6
 timm==0.4.12
 scikit-learn
+SimpleITK
 
