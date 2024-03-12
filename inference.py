@@ -109,7 +109,7 @@ def _show_torch_cuda_info():
 
 
 def loadmodel(MODEL_PATH):
-    print(MODEL_PATH)
+    #print(MODEL_PATH)
     model = create_model(model_name='MIL_VT_small_patch16_512',
             pretrained=False,
             num_classes=2,
@@ -149,7 +149,7 @@ def feature_prediction(models,inputs):
             outputs_class = numpy.asarray(outputs_class)
             preds = numpy.argmax(outputs_class)
             predictions_class.append(preds)
-            print(preds)
+            #print(preds)
     return predictions_class
 
 
