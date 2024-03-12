@@ -8,8 +8,7 @@ RUN adduser --system --group user
 USER user
 
 WORKDIR /opt/app
-RUN apt-get update
-RUN apt install -y libgl1-mesa-glx
+
 COPY --chown=user:user requirements.txt /opt/app
 
 RUN python -m pip install --user -U pip 
