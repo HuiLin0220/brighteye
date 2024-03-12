@@ -4,7 +4,6 @@ import torch.nn.functional as F
 import os
 import numpy as np
 from enum import IntEnum
-import cv2
 import collections
 import threading
 import errno
