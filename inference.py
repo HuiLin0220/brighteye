@@ -1,5 +1,3 @@
-import random
-
 import numpy
 from PIL import Image
 from helper import DEFAULT_GLAUCOMATOUS_FEATURES, inference_tasks
@@ -33,7 +31,7 @@ model_path_list = []
 for idx, f in enumerate(features):
     MODEL_PATH = weights_path + str(idx) + f + ".pth.tar"
     model_path_list.append(MODEL_PATH)
-print(model_path_list)
+
 
 transform_test = transforms.Compose([
         transforms.Resize((img_size, img_size)),
@@ -69,10 +67,10 @@ def run():
 
         is_referable_glaucoma_likelihood = binary_prediction(bi_cls_model,inputs)  
         is_referable_glaucoma = bool(is_referable_glaucoma_likelihood > 0.5)
-        #is_referable_glaucoma = True
         
         
-        if is_referable_glaucoma:
+        
+        if True:
         
             feature_pred = feature_prediction(multi_cls_models,inputs)
 
@@ -82,8 +80,7 @@ def run():
             
         else:
             features = None
-        ...
-
+        print(features)
         # Finally, save the answer
         save_prediction(
             is_referable_glaucoma,
@@ -145,11 +142,11 @@ def feature_prediction(models,inputs):
             model = model.to(device)
             outputs_class = model(inputs)
             outputs_class = utils.softmax(outputs_class.data.cpu().numpy())
-            #print(outputs_class)
+            
             outputs_class = numpy.asarray(outputs_class)
             preds = numpy.argmax(outputs_class)
             predictions_class.append(preds)
-            #print(preds)
+
     return predictions_class
 
 

@@ -2,9 +2,10 @@ import json
 import tempfile
 from pathlib import Path
 from pprint import pprint
-
 import SimpleITK as sitk
 from PIL import Image
+import tifffile
+import numpy as np
 
 DEFAULT_GLAUCOMATOUS_FEATURES = {
     "appearance neuroretinal rim superiorly": None,
@@ -21,7 +22,7 @@ DEFAULT_GLAUCOMATOUS_FEATURES = {
 
 
 def inference_tasks():
-    input_files = [x for x in Path("./test/input/").rglob("*") if x.is_file()]
+    input_files = [x for x in Path("/input").rglob("*") if x.is_file()]
 
     print("Input Files:")
     pprint(input_files)
@@ -43,7 +44,7 @@ def inference_tasks():
             glaucomatous_features_stacked.append(DEFAULT_GLAUCOMATOUS_FEATURES)
 
     for file_path in input_files:
-        if file_path.suffix == ".mha":  # A single image
+        if file_path.suffix == ".mha" or file_path.suffix == ".png":  # A single image
             yield from single_file_inference(image_file=file_path, callback=save_prediction)
         elif file_path.suffix == ".tiff":  # A stack of images
             yield from stack_inference(stack=file_path, callback=save_prediction)
@@ -85,6 +86,46 @@ def single_file_inference(image_file, callback):
         yield output_path, callback
 
 
+
+def stack_inference(stack, callback):
+    de_stacked_images = []
+
+    # Unpack the stack
+    
+    tiff_image = tifffile.imread(stack)
+    print(np.shape(tiff_image))
+    if len(np.shape(tiff_image))==3:
+        page_num =0
+        arr = tiff_image
+        im = Image.fromarray(arr)      
+        output_path =  './data/'+ f"image_{page_num + 1}.jpg"
+        im.save(output_path, "JPEG")
+        
+        de_stacked_images.append(output_path)
+        print(f"De-Stacked {output_path}")
+    
+    else:
+        z,h,w,C=np.shape(tiff_image)
+
+            # Iterate through all pages
+        for page_num in range(z):
+                # Select the current page
+            arr = tiff_image[:,:,page_num]
+            im = Image.fromarray(arr)      
+            output_path =  './data/'+ f"image_{page_num + 1}.jpg"
+            im.save(output_path, "JPEG")
+            print(output_path)
+            de_stacked_images.append(output_path)
+
+            print(f"De-Stacked {output_path}")
+
+        # Loop over the images, and generate the actual tasks
+    for index, image in enumerate(de_stacked_images):
+            # Call back that saves the result
+            yield image, callback
+
+
+'''
 def stack_inference(stack, callback):
     de_stacked_images = []
 
@@ -110,19 +151,22 @@ def stack_inference(stack, callback):
         for index, image in enumerate(de_stacked_images):
             # Call back that saves the result
             yield image, callback
+'''
 
 
 def write_referable_glaucoma_decision(result):
-    print(result)
-    with open(f"./test/output/multiple-referable-glaucoma-binary.json", "w") as f:
+
+    with open(f"/output/multiple-referable-glaucoma-binary.json", "w") as f:
         f.write(json.dumps(result))
 
 
 def write_referable_glaucoma_decision_likelihood(result):
-    with open(f"./test/output/multiple-referable-glaucoma-likelihoods.json", "w") as f:
+
+    with open(f"/output/multiple-referable-glaucoma-likelihoods.json", "w") as f:
         f.write(json.dumps(result))
 
 
 def write_glaucomatous_features(result):
-    with open(f"./test/output/stacked-referable-glaucomatous-features.json", "w") as f:
+
+    with open(f"/output/stacked-referable-glaucomatous-features.json", "w") as f:
         f.write(json.dumps(result))
