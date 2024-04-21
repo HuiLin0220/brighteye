@@ -47,7 +47,7 @@ def inference_tasks():
         if file_path.suffix == ".mha" or file_path.suffix == ".png":  # A single image
             yield from single_file_inference(image_file=file_path, callback=save_prediction)
         elif file_path.suffix == ".tiff":  # A stack of images
-            yield from stack_inference(stack=file_path, callback=save_prediction)
+            yield from stack_inference(path=file_path, callback=save_prediction)
 
     write_referable_glaucoma_decision(is_referable_glaucoma_stacked)
     write_referable_glaucoma_decision_likelihood(
@@ -87,71 +87,47 @@ def single_file_inference(image_file, callback):
 
 
 
-def stack_inference(stack, callback):
+def stack_inference(path, callback):
     de_stacked_images = []
 
     # Unpack the stack
     
-    tiff_image = tifffile.imread(stack)
-    print(np.shape(tiff_image))
-    if len(np.shape(tiff_image))==3:
-        page_num =0
-        arr = tiff_image
-        im = Image.fromarray(arr)      
-        output_path =  './data/'+ f"image_{page_num + 1}.jpg"
-        im.save(output_path, "JPEG")
-        
-        de_stacked_images.append(output_path)
-        print(f"De-Stacked {output_path}")
     
-    else:
-        z,h,w,C=np.shape(tiff_image)
+    
+    #with Image.open(path) as tiff_image:
 
-            # Iterate through all pages
-        for page_num in range(z):
+           
+      #for page_num in range(tiff_image.n_frames):
                 # Select the current page
-            arr = tiff_image[:,:,page_num]
-            im = Image.fromarray(arr)      
-            output_path =  './data/'+ f"image_{page_num + 1}.jpg"
-            im.save(output_path, "JPEG")
-            print(output_path)
-            de_stacked_images.append(output_path)
+                #tiff_image.seek(page_num)
 
-            print(f"De-Stacked {output_path}")
+                # Define the output file path
+                #output_path ='./data/'+ f"image_{page_num + 1}.jpg"
+                #tiff_image.save(output_path, "JPEG")
+
+                #de_stacked_images.append(output_path)
+
+                #print(f"De-Stacked {output_path}")
+    
+    with tifffile.TiffFile(path) as stack:
+        #print(len(stack.pages))
+    
+        for page_num in range(len(stack.pages)):
+                page = stack.pages[page_num]
+                input_image_array = page.asarray()
+                im = Image.fromarray(input_image_array)      
+                output_path =  './data/'+ f"image_{page_num + 1}.jpg"
+                im.save(output_path, "JPEG")
+                
+                de_stacked_images.append(output_path)   
+                print(f"De-Stacked {output_path}")
+
 
         # Loop over the images, and generate the actual tasks
     for index, image in enumerate(de_stacked_images):
             # Call back that saves the result
             yield image, callback
 
-
-'''
-def stack_inference(stack, callback):
-    de_stacked_images = []
-
-    # Unpack the stack
-    with tempfile.TemporaryDirectory() as temp_dir:
-        with Image.open(stack) as tiff_image:
-
-            # Iterate through all pages
-            for page_num in range(tiff_image.n_frames):
-                # Select the current page
-                tiff_image.seek(page_num)
-
-                # Define the output file path
-                #Path(temp_dir)
-                output_path =  './data/'+ f"image_{page_num + 1}.jpg"
-                tiff_image.save(output_path, "JPEG")
-
-                de_stacked_images.append(output_path)
-
-                print(f"De-Stacked {output_path}")
-
-        # Loop over the images, and generate the actual tasks
-        for index, image in enumerate(de_stacked_images):
-            # Call back that saves the result
-            yield image, callback
-'''
 
 
 def write_referable_glaucoma_decision(result):
