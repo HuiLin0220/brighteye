@@ -19,11 +19,8 @@ RUN python -m pip install \
     --requirement requirements.txt
 COPY --chown=user:user helper.py /opt/app
 COPY --chown=user:user inference.py /opt/app
-COPY --chown=user:user test /opt/app/test
+
 COPY --chown=user:user weights /opt/app/weights
-COPY --chown=user:user models /opt/app/models
-COPY --chown=user:user data_manager /opt/app/data_manager
-COPY --chown=user:user data /opt/app/data
 COPY --chown=user:user utils.py /opt/app
 
 ENTRYPOINT ["python", "inference.py"]
