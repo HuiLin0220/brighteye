@@ -8,6 +8,8 @@ import collections
 import threading
 import errno
 import sys
+import cv2
+from PIL import Image
 from sklearn.metrics import roc_curve, roc_auc_score, auc,accuracy_score
 
 def mkdir_if_missing(dir_path):
@@ -238,6 +240,26 @@ def adjust_learning_rate(optimizer, decay_rate=.9):
     for param_group in optimizer.param_groups:
         param_group['lr'] = param_group['lr'] * decay_rate
         print('update lr: ', param_group['lr'])
+
+def crop_center(img_path):
+    
+    Img = cv2.imread(img_path)
+    Img1 = Image.open(img_path)
+    if True:
+        gray = cv2.cvtColor(Img, cv2.COLOR_BGR2GRAY)
+        binary_image = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
+        indices = np.where(binary_image == 0)
+    
+        min_y = np.min(indices[0])
+        min_x = np.min(indices[1])
+        max_y = np.max(indices[0])
+        max_x=np.max(indices[1])
+        
+        
+        cropped_image = Img1.crop((min_x, min_y, max_x, max_y))
+  
+    return cropped_image
+
         
 def Sensitivity(trues, probs2,desired_specificity = 0.95):
     
