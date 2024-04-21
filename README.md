@@ -11,8 +11,8 @@ Our publication:  XX [Arxiv](https://arxiv.org/abs/2310.14961)
       git clone https://github.com/HuiLin0220/brighteye.git
       cd brighteye
       pip install  -r ./requirements.txt
-
-
+- [Model weights]
+Model weights are shared [google drive](https://drive.google.com/drive/folders/1h1KtJcVdIJ1ZTSxNFx_wPZ9w0jya83Ix?usp=drive_link)
 ## References and Acknowledgements:
 
  [1] Jocher, G., Chaurasia, A., & Qiu, J. (2023). Ultralytics YOLO (Version 8.0.0) [Computer software]. https://github.com/ultralytics/ultralytics
