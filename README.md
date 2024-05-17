@@ -3,7 +3,7 @@ This algorithm is for the stenosis detection task in [JustRAIGS Challenge](https
 
 Our publication: 
 
-Brighteye: Glaucoma Screening with Color Fundus Photographs based on Vision Transformer([Arxiv](http://arxiv.org/abs/2405.00857))
+Brighteye: Glaucoma Screening with Color Fundus Photographs based on Vision Transformer. ([Arxiv](http://arxiv.org/abs/2405.00857))
 
 
 
