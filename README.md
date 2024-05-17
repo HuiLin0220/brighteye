@@ -1,7 +1,7 @@
 # Introduction
 This algorithm is for the stenosis detection task in [JustRAIGS Challenge](https://justraigs.grand-challenge.org/), which was held at ISBI 2024. We are ranked **xx**!
 
-Our publication:  XX [Arxiv](http://arxiv.org/abs/2405.00857)
+Our publication:  Brighteye: Glaucoma Screening with Color Fundus Photographs based on Vision Transformer[Arxiv](http://arxiv.org/abs/2405.00857)
 
 
 
