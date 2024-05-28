@@ -1,5 +1,5 @@
 # Introduction
-This algorithm is for the stenosis detection task in [JustRAIGS Challenge](https://justraigs.grand-challenge.org/), which was held at ISBI 2024. We are ranked **xx**!
+This algorithm is for the stenosis detection task in [JustRAIGS Challenge](https://justraigs.grand-challenge.org/), which was held at ISBI 2024. We are ranked **5th**!
 
 Our publication: 
 
