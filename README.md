@@ -1,4 +1,4 @@
-<a href="[https://arxiv.org/abs/2105.05874](http://arxiv.org/abs/2405.00857)" alt="Citation"><img src="https://img.shields.io/badge/cite-citation-blue" /></a>
+<a href="http://arxiv.org/abs/2405.00857" alt="Citation"><img src="https://img.shields.io/badge/cite-citation-blue" /></a>
 
 # Introduction
 This algorithm is for the stenosis detection task in [JustRAIGS Challenge](https://justraigs.grand-challenge.org/), which was held at ISBI 2024. We are ranked **5th**!
