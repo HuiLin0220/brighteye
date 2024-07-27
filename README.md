@@ -1,5 +1,7 @@
-<a href="http://arxiv.org/abs/2405.00857" alt="Citation"><img src="https://img.shields.io/badge/cite-citation-blue" /></a>
 
+[![arXiv](https://img.shields.io/badge/arXiv-2311.12437-blue)](http://arxiv.org/abs/2405.00857)
+ [![cite](https://img.shields.io/badge/cite-BibTex-yellow)](https://scholar.googleusercontent.com/scholar.bib?q=info:igoLIxsSo0MJ:scholar.google.com/&output=citation&scisdr=ClEVFUEEEL3snBU7L_4:AFWwaeYAAAAAZqU9N_41EUOSvJqE4Zbzp2YZRzQ&scisig=AFWwaeYAAAAAZqU9N5sI_NHE-oKJQTLQ6YO3B8E&scisf=4&ct=citation&cd=-1&hl=en&scfhb=1)
+[![website](https://img.shields.io/badge/Challenge%20website-50d13d)](https://justraigs.grand-challenge.org/)
 # Introduction
 This algorithm is for the stenosis detection task in [JustRAIGS Challenge](https://justraigs.grand-challenge.org/), which was held at ISBI 2024. We are ranked **5th**!
 
